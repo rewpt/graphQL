@@ -11,6 +11,7 @@ const uri = `mongodb+srv://rewpt:${userPw}@graphqlproject.jzybpgq.mongodb.net/?r
 
 const app = express();
 
+console.log(userPw);
 // connect to mongo-db-atlas db
 mongoose.connect(uri, {
   useNewUrlParser: true,

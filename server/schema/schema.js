@@ -1,5 +1,7 @@
 const graphql = require('graphql');
 const _ = require('lodash');
+const Book = require('../models/book');
+const Author = require('../models/author');
 
 const {
   GraphQLObjectType,
@@ -9,6 +11,9 @@ const {
   GraphQLID,
   GraphQLList,
 } = graphql;
+
+/* resolve function data is commented out in favour of using the
+mongo db atlas host for data */
 
 //dummy data
 const books = [
@@ -38,7 +43,7 @@ const BookType = new GraphQLObjectType({
     author: {
       type: AuthorType,
       resolve(parent, args) {
-        return authors.find((author) => author.id === parent.authorId);
+        // return authors.find((author) => author.id === parent.authorId);
       },
     },
   }),
@@ -52,7 +57,7 @@ const AuthorType = new GraphQLObjectType({
     books: {
       type: new GraphQLList(BookType),
       resolve(parent, args) {
-        return books.filter((book) => book.authorId === parent.id);
+        // return books.filter((book) => book.authorId === parent.id);
       },
     },
   }),
@@ -67,7 +72,7 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args) {
         //code to get data from db/other source goes here
         //this uses lodash
-        return _.find(books, { id: args.id });
+        // return _.find(books, { id: args.id });
       },
     },
     author: {
@@ -75,7 +80,7 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         //this uses es6
-        return authors.find((author) => author.id == args.id);
+        // return authors.find((author) => author.id == args.id);
       },
     },
     books: {
@@ -83,13 +88,13 @@ const RootQuery = new GraphQLObjectType({
       resolve(parent, args) {
         //can just return the whole thing and graph ql will
         //take care of the fields
-        return books;
+        // return books;
       },
     },
     authors: {
       type: new GraphQLList(AuthorType),
       resolve(parent, args) {
-        return authors;
+        // return authors;
       },
     },
   },
