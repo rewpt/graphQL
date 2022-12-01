@@ -1,4 +1,5 @@
 require('dotenv').config();
+var cors = require('cors');
 const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const schema = require('./schema/schema');
@@ -10,8 +11,8 @@ const userPw = process.env.CONNECTION_STRING;
 const uri = `mongodb+srv://rewpt:${userPw}@graphqlproject.jzybpgq.mongodb.net/?retryWrites=true&w=majority`;
 
 const app = express();
+app.use(cors());
 
-console.log(userPw);
 // connect to mongo-db-atlas db
 mongoose.connect(uri, {
   useNewUrlParser: true,

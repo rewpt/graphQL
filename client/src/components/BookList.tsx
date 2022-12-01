@@ -13,7 +13,7 @@ const getBooksQuery = gql`
 
 type book = {
   name: string;
-  id: number;
+  id: string;
   author: string;
 };
 
@@ -26,7 +26,7 @@ function BookList() {
   return (
     <div>
       <ul>
-        {data.map((book: book) => {
+        {data.books.map((book: book) => {
           return <li>{book.name}</li>;
         })}
       </ul>
